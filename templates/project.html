@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen Z Hub</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" href="{{url_for('static',filename='image/logo.png')}}">
+</head>
+<body>
+    <nav>
+        <img src="/static/image/logo.png" alt="">
+        <a href="/">Home</a>
+        <a href="/shop">Shop</a>
+        <a href="/contact">Contact</a>
+        <a href="{{url_for('view_cart')}}"><i class="fa-solid fa-cart-arrow-down"></i><span>{{session['cart']|length}}</span></a>
+        <a href=""><i class="fa-regular fa-user"></i></a>
+
+        <form action="/search" method="post">
+        <input type="search" name="User_query" placeholder="Search">
+        <button>Search</button>
+        </form>
+
+    </nav>
+    <header>
+        <h1>Gen Z Hub </h1>
+        <b>your style your vibe</b>
+
+    </header>
+    <div class="main">
+        <div class="container">
+            {% for product in products %}
+            <div class="card">
+                <img src="/static/image/{{product.image}}" alt="">
+               <div class="card-content">
+                  <h3>{{product.name}}</h3>
+                  <p>{{product.price}} EGP</p>
+                  <form action="{{url_for('add_to_cart',product_id=product.id) }}" method="POST">
+                  <button type="submit" class="add-btn">Add to cart</button>
+                  </form>
+
+               </div>
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+        <div class="sidebar">
+            <h2>Brands</h2>
+            {%for brand in  brands%}
+            <a href="/filter/{{brand.name}}"><h3>{{brand.name}}</h3></a>
+
+            {%endfor%}
+
+
+        </div>
+    </div>
+
+</body>
+</html>

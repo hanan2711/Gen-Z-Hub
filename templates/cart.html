@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>Your Shopping Cart</h1>
+<div  class="cart">
+    {%for item in items%}
+    <div>
+      <img class="imges" src="/static/image/{{item.image}}" alt="">
+      <h3>{{item.name}}</h3>
+      <p>Price:{{item.price}} EGP</p>
+      <p>Quantity: <strong>{{item.quantity}}</strong></p>
+      <a href="{{url_for('add_to_cart',product_id=item.id)}}" class="btn-plus"><i class="fa-solid fa-plus"></i></a>
+      <a href="{{url_for('decrease_cart',product_id=item.id)}}" class="btn-minus"><i class="fa-solid fa-minus"></i></a>
+      <a href="{{url_for('remove_to_cart',product_id=item.id)}}"><button class="delete">Delete</button></a>
+    </div>  
+    {%endfor%}
+</div>
+<div class="price">
+    <h3>Total: <span class="total">{{total}}</span> EGP</h3>
+    <a href="{{url_for('checkout')}}"><button class="complate">Complate Shopping</button></a> 
+
+</div>
+<div class="cart-container">
+    {% if session['cart']and session['cart']|length>0%}
+      {%for id,quantity in session['cart'].items()%}
+      {%ensfor%}
+     <div class="total"></div>
+    {%else%}
+      <div class="empty-cart"style="text-align:center; padding:50px;">
+        <h2>Your Cart is currently empty</h2>
+        <a href="{{url_for('home')}}"  class="btn-shop-now"style=""></a>
+        
+
+      </div>
+
+
+     
+
+</div>
+
+
+</body>
+</html>
+
+
