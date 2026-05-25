@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>payment</title>
+</head>
+<body class="payment-body">
+    <div class="payment-card">
+      <h2>Complate the purchase process</h2>
+     <p>Total amount: <span class="amount">{{total}}</span>EGP</p>
+     <H3>Choose payment method</H3>
+        <form action="{{url_for('complate_order')}}"method="POST">
+         <input type="radio"id="cash"name="payment_method"value="Cash"onclick="togglepayment('Cash-form')">
+         <label for="cash">Cash on Delivery</label>
+
+         <input type="radio"id="visa"name="payment_method"value="Visa"onclick="togglepayment('visa-form')">
+         <label for="visa">Credit card</label>            
+         <input type="radio"id="vodafone"name="payment_method"value="vodafone"onclick="togglepayment('vodafone-form')">
+         <label for="vodafone">Vodafone Cash</label>   
+         <input type="radio"id="instapay"name="payment_method"value="instapay"onclick="togglepayment('instapay-form')">
+         <label for="instapay">Instapay</label>
+    </div>
+
+    <div id="visa-form" class="payment-details">
+        <h4>Card Details</h4>
+        <input class="input" type="text" placeholder="Card Number(16 digits)">
+        <input class="input" type="text" placeholder="MM/YY">
+        <input class="input" type="text" placeholder="CVV">
+
+    </div>
+    <div id="vodafone-form" class="payment-details">
+        <h4>Vodafone Cash</h4>
+        <p>Please  transfer  to: <strong>010xxxxxxxx</strong></p>
+        <input class="input" type="text" placeholder="Your Phone Number">
+    </div>
+    <div id="instapay-form" class="payment-details">
+      <h4>Instapay</h4>
+      <p>Send to Address: <strong>hanan@instapay</strong></p>
+      <input  class="input" type="text" placeholder="Transaction ID">
+    </div>
+    <div id="Cash-form" class="payment-details">
+      <h4>Cash</h4>
+      <p>please write the address</p>
+      <input class="input" type="text">
+    </div>
+       <button class="confirm" type="submit">Confirm the order</button>
+    </form>
+    
+    <div id="message-box"style="display:none;">
+        Order complated! Thatnk you.
+        <button class="ok" type="button" onclick="window.location.href='/'">OK</button>
+
+    </div>
+    <script>
+        function showDone(){
+            var box =document.getElementById('message-box');
+            box.style.display='block';
+            document.querySelector('button').style.display='none';
+        }
+    </script>
+    <script>
+        function
+        togglepayment(id){
+            var details= document.getElementsByClassName('payment-details');
+            for(var i =0; i< details.length;i++){
+                details[i].style.display='none';
+
+            }
+            var  targetCard=document.getElementById(id);
+            if (targetCard){
+                targetCard.style.display='block';
+            }
+        }
+
+        
+
+
+    </script>
+
+</body>
+</html>
